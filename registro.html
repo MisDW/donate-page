@@ -1,0 +1,22 @@
+<?php
+require_once __DIR__. '/conexion.php';
+
+
+$conexion = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE)
+or die("No se conectó con el servidor" . DB_SERVER);
+
+$username = $_POST["nombre"];
+    $apellido = $_POST["ape"];
+    $email = $_POST["email"];
+    $edad = $_POST["edad"];
+    $gene = $_POST["gene"];
+    $contra = $_POST["contrasena"];
+
+$query = "INSERT INTO usuarios (nombre, ape, email, edad, gene, contrasena) VALUES ('$username', '$apellido', '$email', '$edad', '$gene', '$contra')";
+$resultado = mysqli_query($conexion, $query);
+
+if ($resultado === TRUE){
+    echo "<script>alert('La persona se registró correctamente'); window.location.href = 'inicio_sesion.php';</script>";
+}else{
+    echo "<script>alert('Oops! Hubo un error al registrar a la persona'); window.location.href = 'inicio_sesion.php';</script>";
+}
